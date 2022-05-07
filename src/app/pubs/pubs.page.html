@@ -1,0 +1,113 @@
+<ion-content [scrollEvents]="true" (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)"
+  (ionScrollEnd)="logScrollEnd()">
+  <h1>Pubs</h1>
+
+  <div slot="fixed">
+    <h1></h1>
+  </div>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Pubs</ion-title>
+      <ion-buttons slot="start">
+
+        <ion-menu-button style="margin-top: -1%; " menuId="menu"></ion-menu-button>
+
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div style="padding:15px;background-color:rgb(179, 227, 244)">
+    <!--Interpolation: displaying current date and time -->
+    <span style="font-size:12px;font-weight:600">{{currentDate|date:"medium"}}</span>
+
+
+  </div>
+
+  <ul>
+    <br>
+
+
+    <h4 style="margin:1px ; font-weight: bold; margin-left: -3ch;">List of Pubs</h4>
+    <ion-card style="background-color: rgb(179, 227, 244); font-size: larger; color: black; margin-left: -3ch; ">
+      <div style="padding:2px">
+        <ol>
+          <li style=" font-size: 14px; padding:2px" *ngFor="let pub of pubs">
+            <!--Interpolation : looping through a pub JSON list to display the existing pubs -->
+            {{pub}}
+          </li>
+        </ol>
+      </div>
+    </ion-card>
+
+  </ul>
+
+  <hr>
+
+  <!--Looping through an array of pubs-->
+  <ion-router-outlet id="main"></ion-router-outlet>
+  <div *ngFor="let pub of pub; let i = index">
+    <ion-card>
+      <ion-card-header>
+        <!--Interpolating pubs data from the array of pubs -->
+        <ion-card-title style="font-size: xx-large; color: black;">{{i+1}}. {{pub.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <!--Property binding to the image src property to the pub image_url link inorder to show images on the application -->
+          <img style="width: 200%;" [src]="pub.image_url">
+        </div>
+        <div>
+          <p>{{pub.description}}</p>
+        </div>
+        <!--One way data binding: Binding of href to the pub website link-->
+        <p><a style="font-size: 14px; color: blue;" [href]="pub.link"><i>Visit the Website</i></a></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+
+
+
+  <h4 style="font-weight: bold;">Other Options</h4>
+  <!--Functions were bound using event binding illusrated using (click) and the isDisabled variable is bound using propetry binding  as 
+demostrated below using the [disabled]-->='isDisabled'
+
+  <h5 style="font-weight: bold;">Click to Go to Hotels Page</h5>
+
+  <ion-button (click)="GoNextToHotelsPage()" [disabled]="isDisabled"><span style="font-size:12px">Next</span>
+  </ion-button>
+
+  <h5 style="font-weight: bold;">Go Back to Home Page</h5>
+  <ion-button (click)="GoBackToHomePage()" [disabled]="isDisabled"><span style="font-size:12px">Back To Home</span>
+  </ion-button>
+
+  <h5 style="font-weight: bold;"> Click to Open Menu</h5>
+  <ion-button (click)="OpenMenu()" [disabled]="isDisabled"><span style="font-size:12px">Open Menu</span></ion-button>
+
+
+
+  <br>
+  <br>
+
+  <ion-title style="font-weight: bold;">Your Current Page Status is: {{myPageStatus}}
+    <!--Interpolating to display current page status set by the user-->
+
+  </ion-title>
+  <ion-list>
+    <!--Two way data binding using ngModel on the myPageStatus variable to make the user changes reflect instantly-->
+    <ion-radio-group [(ngModel)]="myPageStatus">
+      <ion-item>
+        <ion-label style="font-size: larger;">Pubs</ion-label>
+        <ion-radio slot="start" value="Pubs"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-button (click)="saveStatus()" [disabled]="isDisabled"><span style="font-size:12px">Save Status</span>
+  </ion-button>
+
+
+
+  <ion-content>

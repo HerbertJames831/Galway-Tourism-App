@@ -1,0 +1,124 @@
+<ion-content [scrollEvents]="true" (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)"
+  (ionScrollEnd)="logScrollEnd()">
+  <h1>Hotels</h1>
+
+  <div slot="fixed">
+    <h1></h1>
+
+  </div>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Hotels</ion-title>
+      <ion-buttons slot="start">
+
+        <ion-menu-button style="margin-top: -1%; " menuId="menu"></ion-menu-button>
+
+      </ion-buttons>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <div style="padding:15px;background-color:rgb(179, 227, 244)">
+
+    <span style="font-size:12px;font-weight:600">
+      <!--Interpolation: displaying current date and time -->
+      {{currentDate|date:"medium"}}
+    </span>
+
+
+  </div>
+
+  <ul>
+    <br>
+
+    <h4 style="margin:1px ; font-weight: bold; margin-left: -3ch;">List of Hotels</h4>
+    <ion-card style="background-color: rgb(179, 227, 244); font-size: larger; color: black; margin-left: -3ch; ">
+      <div style="padding:2px">
+        <ol>
+          <li style=" font-size: 14px; padding:2px" *ngFor="let h of hotel">
+            <!--Interpolation : looping through a hotel json list to display the existing hotels -->
+            {{h.name}}
+          </li>
+        </ol>
+      </div>
+    </ion-card>
+
+  </ul>
+
+  <hr>
+
+
+
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+  <!--Looping through an array of hotels-->
+  <div *ngFor="let hotel of hotel; let i = index">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="font-size: xx-large; color: black;">
+          <!--Interpolating hotels data from the array of hotels -->
+          {{i+1}}. {{hotel.name}}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <!--Property binding to the image src property to the hotel image_url link inorder to show images on the application -->
+          <img style="width: 200%;" [src]="hotel.image_url">
+        </div>
+        <div>
+          <p>{{hotel.description}}</p>
+        </div>
+        <p>
+          <!--One way data binding: Binding of href to the hotel website link-->
+          <a style="font-size: 14px; color: blue;" [href]="hotel.link"><i>Visit the Website</i></a>
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+
+
+
+
+
+  <h4 style="font-weight: bold;">Other Options</h4>
+  <!--Functions were bound using event binding illusrated using (click) and the isDisabled variable is bound using propetry binding  as 
+demostrated below using the [disabled]-->='isDisabled'
+
+  <h5 style="font-weight: bold;">Click to Go To Attractions Page</h5>
+  <ion-button (click)="GoNextToAttractionsPage()" [disabled]="isDisabled">Next</ion-button>
+
+  <h5 style="font-weight: bold;">Click to Go Back to Pubs Page</h5>
+  <ion-button (click)="GoBackToPubsPage()" [disabled]="isDisabled">Back</ion-button>
+
+  <h5 style="font-weight: bold;">Click to Go Back to Home Page</h5>
+  <ion-button (click)="ClicktoGoBackToHomePage()" [disabled]="isDisabled">Back To Home</ion-button>
+
+  <h5 style="font-weight: bold;">Click to Open Menu</h5>
+  <ion-button (click)="OpenMenu()" [disabled]="isDisabled">Open Menu</ion-button>
+
+  <h5 style="font-weight: bold;"> Click to Close Menu</h5>
+  <ion-button (click)="CloseMenu()" [disabled]="isDisabled">Close Menu</ion-button>
+  <br>
+  <br>
+  <ion-title style="font-weight: bold;">
+    Your Current Page Status is: {{myPageStatus}}
+    <!--Interpolating to display current page status set by the user-->
+  </ion-title>
+  <ion-list>
+    <!--Two way data binding using ngModel on the myPageStatus variable to make the user changes reflect instantly-->
+    <ion-radio-group [(ngModel)]="myPageStatus">
+      <ion-item>
+        <ion-label style="font-size: larger;">Hotels</ion-label>
+        <ion-radio slot="start" value="Hotels"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-button (click)="saveStatus()" [disabled]="isDisabled">Save Status</ion-button>
+
+
+  <ion-content>

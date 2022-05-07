@@ -1,20 +1,82 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div slot="fixed">
+    <h4 style="margin-left: 4ch; margin: -22;margin-top:30px; font-weight: bolder;"><span> Galway Tourism App</span>
+    </h4>
+    <ion-buttons slot="start">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+      <ion-menu-button style="margin-top: -18.4%; " menuId="menu"></ion-menu-button>
+
+    </ion-buttons>
+  </div>
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>
+
+
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+
+
+
+
+
+  <!--Interpolating JSON data from an external URL-->
+  <h5 style="font-weight: bold;">Weather In Galway </h5>
+
+  <div style="font-weight: 500; font-size: 14px;" *ngIf="weather.length ===1">{{weather[0].main}},
+    {{weather[0].description}} </div>
+  <div style="margin-top:10px;padding:15px 10px;border-radius: 5px; border: 1.5px solid rgb(215, 170, 170)">
+    <ion-title style="font-weight: 500;color:rgb(243, 12, 12); font-size: 14px; ">Choose the page !</ion-title>
+    <ion-title style="font-weight: 500;color:rgb(54, 52, 52); font-size: 14px;">Latest page status: <span
+        style="font-weight:600;color:#000"> {{myPageStatus}}</span></ion-title>
+
   </div>
+
+
+  <h5 style="font-weight: bold; font-size:14px">Update Pubs Page Status</h5>
+  <ion-button (click)="UpdatePubsPageStatus()" [disabled]="isDisabled"><span style="font-size:12px">Update Status</span>
+  </ion-button>
+
+  <h5 style="font-weight: bold; font-size:14px">Update Hotels Page Status</h5>
+  <ion-button (click)="UpdateHotelsPageStatus()" [disabled]="isDisabled"><span style="font-size:12px">Update
+      Status</span></ion-button>
+
+  <h5 style="font-weight: bold; font-size:14px;">Update Attractions Page Status</h5>
+  <ion-button (click)="UpdateAttractionsPageStatus()" [disabled]="isDisabled"><span style="font-size:12px">Update
+      Status</span></ion-button>
+  <hr>
+
+  <h5 style="font-weight: bold; font-size:14px">Extra Feature: Flashlight</h5>
+  <ion-button (click)="Flashlight()"><span style="font-size:12px">Flashlight</span></ion-button>
+
+
+  <h4 style="font-weight: bold;">Other Options</h4>
+  <div>
+    <span>
+      <ion-button (click)="GoNextToPubsPage()" [disabled]="isDisabled"><span style="font-size:12px">Next</span>
+      </ion-button>
+    </span>
+    <span>
+      <ion-button (click)="ClicktoViewPubsPage()" [disabled]="isDisabled"><span style="font-size:12px">Pubs</span>
+      </ion-button>
+    </span>
+    <span>
+      <ion-button (click)="ClicktoViewHotelsPage()" [disabled]="isDisabled"><span style="font-size:12px">Hotels</span>
+      </ion-button>
+    </span>
+    <span>
+      <ion-button (click)="ClicktoViewAttractionsPage()" [disabled]="isDisabled"> <span style="font-size:12px">
+          Attractions </span></ion-button>
+    </span>
+    <span>
+      <ion-button (click)="Info()" [disabled]="isDisabled"> <span style="font-size:12px">Info</span></ion-button>
+    </span>
+  </div>
+
+  <ion-button (click)="OpenMenu()" [disabled]="isDisabled"><span style="font-size:12px">Open Menu</span></ion-button>
+
+
 </ion-content>
